@@ -1,0 +1,24 @@
+.footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 104px 0 104px;
+    height: 80px;
+}
+
+.footer__description {
+    margin: 0;
+}
+
+.footer__container {
+    display: flex;
+}
+
+.footer__link {
+    margin: 0;
+    margin-right: 42px;
+}
+
+.footer__link_indent {
+    margin-left: 28px;
+}
+

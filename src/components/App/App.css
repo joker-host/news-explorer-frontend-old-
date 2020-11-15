@@ -1,0 +1,11 @@
+body {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    /* padding: 0 105px 0 105px; */
+}
+
+.link {
+    text-decoration: none;
+    color: inherit;
+}
