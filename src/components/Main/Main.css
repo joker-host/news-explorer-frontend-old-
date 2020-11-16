@@ -1,12 +1,11 @@
 /* section search */
-
 /* section search */
-
 /* section search */
 
 .search {
     background-image: url(../../images/main-back.png);
     background-repeat: no-repeat;
+    background-size: cover;
     height: 576px;
     display: flex;
     flex-direction: column;
@@ -70,14 +69,168 @@
     transition: background-color 0.1s linear;
 }
 
-/* section about-author */
+/* section search-results */
+/* section search-results */
+/* section search-results */
+
+.search-results {
+    background-color: #F5F6F7;;
+    padding: 80px 104px 80px 104px;
+    display: grid;
+}
+
+.search-results__header {
+    margin: 0;
+    margin-bottom: 64px;
+}
+
+.search-results__cards {
+    display: grid;
+    grid-template-columns: repeat(3, min-content);
+    grid-gap: 16px;
+    justify-content: center;
+}
+
+.search-results__card {
+    position: relative;
+    width: 400px;
+    height: 576px;
+    /* border: 1px solid red; */
+}
+
+.search-results__save-button {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 24px;
+    right: 24px;
+    border-radius: 8px;
+    border: none;
+    background-image: url(./../../images/save_button.svg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-color: #FFFFFF;
+}
+
+.search-results__save-button-active {
+    background-image: url(./../../images/save_button_active.svg);
+}
+
+.search-results__save-button:focus {
+    outline: none; 
+}
+
+.search-results__save-button:active {
+    outline: none;
+}
+
+.search-results__image {
+    border-radius: 8px 8px 0 0;
+}
+
+.search-results__card-wrapper {
+    padding: 20px 24px 20px 24px;
+    background-color: #FFFFFF;
+    border-radius: 0 0 8px 8px;
+}
+
+.search-results__date {
+    margin: 0;
+    margin-bottom: 12px;
+}
+
+.search-results__card-title {
+    margin: 0;
+    margin-bottom: 16px;
+}
+
+.search-results__card-description {
+    margin: 0;
+    margin-bottom: 18px;
+}
+
+.search-results__card-source {
+    margin: 0;
+}
+
+.search-results__else-news-button {
+    width: 288px;
+    height: 64px;
+    border-radius: 80px;
+    border: none;
+    background-color: #FFFFFF;
+    margin: auto;
+}
+
+/* section search-in-process */
+/* section search-in-process */
+/* section search-in-process */
+
+.search-in-process {
+    display: none;
+    min-height: 282px;
+    background-color: #F5F6F7;
+    /* display: flex; */
+    flex-direction: column;
+    align-items: center;
+    padding-top: 80px;
+    box-sizing: border-box;
+}
+
+.search-in-process__preloader {
+    display: block;
+	width: 75px;
+	height: 75px;
+	border: 1px solid #000000;
+	border-bottom-color: #888;
+	border-radius: 50%;
+    margin-bottom: 24px;
+	animation: spin .8s infinite linear;
+}
+
+@keyframes spin {
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+.search-in-process__label {
+    margin: 0;
+}
+
+/* section search-without-results */
+/* section search-without-results */
+/* section search-without-results */
+
+.search-without-results {
+    height: 374px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-without-results__image {
+    margin-bottom: 24px;
+}
+
+.search-without-results__title {
+    margin: 0;
+    margin-bottom: 16px;
+}
+
+.search-without-results__label {
+    margin: 0;
+}   
 
 /* section about-author */
-
+/* section about-author */
 /* section about-author */
 
 .about-author {
     display: flex;
+    justify-content: center;
+    padding-top: 80px;
 }
 
 .about-author__avatar-wrapper {
@@ -89,13 +242,12 @@
     height: 465px;
     object-fit: cover;
     border-radius: 50%;
-    margin: 80px 0 104px 80px;
+    margin: 0 0 104px 80px;
 }
 
 .about-author__description-wrapper {
     display: flex;
     flex-direction: column;
-    margin-top: 90px;
 }
 
 .about-author__description-header {
@@ -113,32 +265,4 @@
     font-weight: normal;
     font-size: 18px;
     line-height: 24px;
-}
-
-/* section search-results */
-
-/* section search-results */
-
-/* section search-results */
-
-.search-results {
-    padding: 0 104px 0 104px;
-}
-
-.search-results__header {
-
-}
-
-.search-results__card {
-    width: 400px;
-    height: 576px;
-    border: 1px solid red;
-}
-
-.search-results__image {
-    border-radius: 8px 8px 0 0;
-}
-
-.search-results__card-wrapper {
-    padding: 20px 24px 20px 24px;
 }

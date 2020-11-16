@@ -10,12 +10,8 @@ function Header() {
           <p>NewsExplorer</p>
         </a>
         <div className="header__nav-bar">
-            <a className="link" href="#">
-              <p className="header__nav-text">Главная</p>
-            </a>
-            <a className="link" href="#">
-              <p className="header__nav-text">Сохраненные статьи</p>
-            </a>
+            <a className="header__link" href="#">Главная</a>
+            <a className="header__link" href="#">Сохраненные статьи</a>
             <button className="header__logged-in-button">Авторизоваться</button>
         </div>
     </header>

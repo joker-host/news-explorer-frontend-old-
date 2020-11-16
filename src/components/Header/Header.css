@@ -21,15 +21,20 @@
 }
 
 
-.header__nav-text {
+.header__link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: relative;
     display: flex;
+    text-decoration: none;
+    color: inherit;
     margin-right: 32px;
 }
 
-.header__nav-text::after {
+.header__link::after {
     content: '';
-    bottom: -32px;
+    bottom: -16px;
     left: 0;
     position: absolute;
     width: 100%;
@@ -49,7 +54,6 @@
 
 .header__logged-in-button:focus {
     outline: none;
-    
 }
 
 .header__logged-in-button:active {

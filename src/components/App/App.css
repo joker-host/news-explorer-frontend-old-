@@ -1,11 +1,17 @@
 body {
-    position: relative;
+    /* position: relative; */
     margin: 0;
     padding: 0;
     /* padding: 0 105px 0 105px; */
 }
 
+.visible {
+    display: flex !important;
+}
+
 .link {
     text-decoration: none;
     color: inherit;
+    height: 20px;
+    border: 1px solid red;
 }

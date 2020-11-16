@@ -15,7 +15,13 @@
 
 .footer__link {
     margin: 0;
-    margin-right: 42px;
+    height: 20px;
+    text-decoration: none;
+    color: inherit;
+}
+
+.footer__link_text {
+    margin-right: 30px;
 }
 
 .footer__link_indent {

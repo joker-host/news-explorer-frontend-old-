@@ -10,17 +10,13 @@ function Footer() {
     <footer className="footer">
         <p className="footer__description">&copy; 2020 Supersite, Powered by News API</p>
         <div className="footer__container">
-            <a className="link" href="#">
-              <p className="footer__link">Главная</p>
-            </a>
-            <a className="link" href="#">
-              <p className="footer__link">Яндекс.Практикум</p>
-            </a>
-            <a className="link" href="#">
+            <a className="footer__link footer__link_text" href="#">Главная</a>
+            <a className="footer__link footer__link_text" href="#">Яндекс.Практикум</a>
+            <a className="footer__link" href="#">
               <img className="footer__link-image" src={git}></img>
             </a>
-            <a className="link" href="#">
-              <img className="footer__link-image footer__link_indent" src={facebook}></img>
+            <a className="footer__link footer__link_indent" href="#">
+              <img className="footer__link-image" src={facebook}></img>
             </a>
         </div>
     </footer>
