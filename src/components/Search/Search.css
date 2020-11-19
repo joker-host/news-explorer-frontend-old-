@@ -1,0 +1,30 @@
+.search {
+    background-image: url(../../images/main-back.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 576px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #FFFFFF;
+}
+
+.search__wrapper {
+    width: 608px;
+}
+
+.search__title {
+    margin: 0;
+    padding: 0;
+    font-family: 'RobotoSlab', Arial, sans-serif;
+    font-size: 60px;
+    line-height: 64px;
+    font-weight: 400;
+}
+
+.search__description {
+    font-size: 18px;
+    line-height: 24px;
+    font-weight: 400;
+}

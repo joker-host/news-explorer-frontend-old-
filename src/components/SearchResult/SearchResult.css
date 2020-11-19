@@ -1,0 +1,50 @@
+.search-results {
+    background-color: #F5F6F7;;
+    padding: 80px 104px 80px 104px;
+    display: grid;
+}
+
+.search-results__header {
+    margin: 0;
+    margin-bottom: 64px;
+    font-family: 'RobotoSlab', Arial, sans-serif;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 46px;
+    color: #1A1B22;
+}
+
+.search-results__cards {
+    display: grid;
+    grid-template-columns: repeat(3, min-content);
+    grid-gap: 16px;
+    justify-content: center;
+}
+
+.search-results__else-news-button {
+    width: 288px;
+    height: 64px;
+    cursor: pointer;
+    border-radius: 80px;
+    border: none;
+    background-color: #dadada;
+    transition: .3s ease;
+    margin: auto;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 24px;
+}
+
+.search-results__else-news-button:hover {
+    opacity: 0.7;
+}
+
+.search-results__else-news-button:active {
+    opacity: 1;
+    outline: none;
+    background-color: #aaaaaa;
+}
+
+.search-results__else-news-button:focus {
+    outline: none;
+}

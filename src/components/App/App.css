@@ -1,17 +1,8 @@
-body {
-    /* position: relative; */
-    margin: 0;
-    padding: 0;
-    /* padding: 0 105px 0 105px; */
+.body {
+    min-width: 300px;
+    font-family: 'Roboto', Arial, sans-serif;
 }
 
 .visible {
     display: flex !important;
-}
-
-.link {
-    text-decoration: none;
-    color: inherit;
-    height: 20px;
-    border: 1px solid red;
 }
