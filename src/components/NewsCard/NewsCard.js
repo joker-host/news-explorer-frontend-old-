@@ -7,22 +7,31 @@ function NewsCard() {
 
     return (
         <div className="search-results__card">
-            <div className="search-results__save-button-wrapper">
-                <Switch>
-                    <Route path="/main">
+
+
+            <Switch>
+                <Route path="/main">
+                    <div className="search-results__save-button-wrapper">
                         <div className="search-results__save-button"></div>
                         <div className="search-results__save-button-description">
                             <p className="search-results__save-button-description-text">Войдите, чтобы сохранять статьи</p>
                         </div>
-                    </Route>
-                    <Route path="/saved-news">
+                    </div>
+                </Route>
+                <Route path="/saved-news">
+                    <div class="search-results__card-tag">
+                        <p class="search-results__card-text">Большой текстБольшой текстБольшой текстБольшой текст</p>
+                    </div>
+                    <div className="search-results__save-button-wrapper">
                         <div className="search-results__save-button search-results__delete"></div>
+
                         <div className="search-results__save-button-description">
                             <p className="search-results__save-button-description-text">Убрать из сохранённых</p>
                         </div>
-                    </Route>
-                </Switch>
-            </div>
+                    </div>
+                </Route>
+            </Switch>
+
             <img className="search-results__image" src={news_1}></img>
             <a className="search-results__card-wrapper" href="#">
                 <p className="search-results__date">2 августа, 2019</p>

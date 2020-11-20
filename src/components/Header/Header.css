@@ -11,6 +11,10 @@
     color: #FFFFFF;
 }
 
+.header__menu {
+    display: none;
+}
+
 .header__logo {
     margin: 0;
     padding: 0;
@@ -23,6 +27,10 @@
 
 .header__logo:hover {
     opacity: .7;
+}
+
+.header__logo:focus {
+    outline: none;
 }
 
 .header__title {
@@ -38,7 +46,6 @@
     display: flex;
     align-items: center;
 }
-
 
 .header__link {
     position: relative;
@@ -69,11 +76,12 @@
 
 .header__logged-in-button {
     color: #FFFFFF;
-    background-image: none; 
+    background-image: none;
     background: transparent;
     cursor: pointer;
-    width: 176px;
     height: 48px;
+    width: auto;
+    padding: 8px 12px;
     border: 1px solid #FFFFFF;
     border-radius: 100px;
     font-weight: 500;
@@ -106,7 +114,7 @@
     justify-content: space-between;
     box-sizing: border-box;
     padding: 20px 105px 15px 105px;
-    border-bottom: 1px solid rgba(196, 196, 196, 0.7);;
+    border-bottom: 1px solid rgba(196, 196, 196, 0.7);
     width: 100%;
 }
 
@@ -123,10 +131,11 @@
     display: flex;
     align-items: center;
     color: inherit;
-    background-image: none; 
+    background-image: none;
     background: transparent;
     cursor: pointer;
     width: auto;
+    padding: 8px 12px;
     height: 48px;
     border: 1px solid #1A1B22;
     border-radius: 100px;
@@ -152,4 +161,97 @@
 
 .header__logged-out-image {
     margin-left: 5px;
+}
+
+/* media */
+/* media */
+/* media */
+
+@media (max-width: 1280px) {
+    .header {
+        padding: 20px 60px 15px 60px;
+    }
+}
+
+@media (max-width: 900px) {
+    .header {
+        padding: 20px 40px 15px 40px;
+        height: 66px;
+        font-size: 16px;
+    }
+    .header-white {
+        padding: 20px 40px 15px 40px;
+        height: 66px;
+    }
+    .header__link {
+        margin-right: 16px;
+        font-size: 16px;
+    }
+    .header__logged-in-button {
+        font-size: 16px;
+        height: 40px;
+    }
+    .header__underline {
+        bottom: -19px;
+    }
+    .header-white__underline {
+        bottom: -19px;
+    }
+    .header__logged-out-button {
+        height: 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    .header__logo:hover {
+        opacity: 1;
+    }
+
+    .header__link:hover {
+        opacity: 1;
+    }
+
+    .header__logged-in-button:hover {
+        opacity: 1;
+    }
+
+    .header__logged-in-button:active {
+        opacity: 1;
+        border: 1px solid #FFFFFF;
+    }
+
+    .header__logged-out-button:hover {
+        opacity: 1;
+    }
+
+    .header__logged-out-button:active {
+        opacity: 1;
+        border: 1px solid  #1A1B22;
+    }
+}
+
+@media (max-width: 690px) {
+    .header {
+        padding: 16px;
+    }
+
+    .header-white {
+        padding: 16px;
+    }
+
+    .header__menu {
+        display: block;
+    }
+
+    .header__link {
+        display: none;
+    }
+
+    .header__logged-in-button {
+        display: none;
+    }
+
+    .header__logged-out-button {
+        display: none;
+    }
 }

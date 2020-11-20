@@ -1,6 +1,7 @@
 .search-without-results {
     height: 374px;
-    display: flex;
+    /* display: flex; */
+    display: none;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -23,7 +24,7 @@
 
 .search-without-results__label {
     margin: 0;
-    width: 356px;
+    max-width: 356px;
     text-align: center;
     color: #B6BCBF;
     font-weight: 400;

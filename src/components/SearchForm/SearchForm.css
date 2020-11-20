@@ -66,3 +66,37 @@
     background-color: #2A65CC;
     transition: background-color 0.3s linear;
 }
+
+/* media */
+/* media */
+/* media */
+
+@media (max-width: 768px) {
+
+    .search__form-button {
+        transition: none;
+    }
+    
+    .search__form-button:hover {
+        background-color: #2F71E5;
+    }
+
+    .search__form-button:active {
+        outline: none;
+        background-color: #2F71E5;
+        transition: none;
+    }
+    
+}
+
+@media (max-width: 690px) {
+    .search__form-button {
+        position: static;
+        width: 100%;
+        height: 56px;
+    }
+
+    .search__form-input {
+        margin-bottom: 16px;
+    }
+}
