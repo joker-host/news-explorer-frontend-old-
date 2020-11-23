@@ -1,15 +1,15 @@
 import './SearchForm.css';
+
 import React from 'react';
-import { Route, Link, useHistory } from 'react-router-dom';
+// import { Route, Link, useHistory } from 'react-router-dom';
 
 function SearchForm() {
-
-    return (
+  return (
         <form className="search__form">
-            <input className="search__form-input" placeholder="Введите тему новости" />
+            <input className="search__form-input" placeholder="Введите тему новости" required/>
             <button type="submit" className="search__form-button">Искать</button>
         </form>
-    );
+  );
 }
 
 export default SearchForm;

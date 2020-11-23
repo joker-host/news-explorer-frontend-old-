@@ -1,9 +1,9 @@
 import './SavedNewsHeader.css';
+
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 function SavedNewsHeader() {
-
   return (
     <section className="saved-news-info">
         <h2 className="saved-news-info__title">Сохранённые статьи</h2>

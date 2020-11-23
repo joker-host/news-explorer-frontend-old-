@@ -1,13 +1,12 @@
 import './Search.css';
 
+import React from 'react';
 import SearchForm from '../SearchForm/SearchForm';
 
-import React from 'react';
-import { Route, Link, useHistory } from 'react-router-dom';
+// import { Route, Link, useHistory } from 'react-router-dom';
 
 function Search() {
-
-    return (
+  return (
         <section className="search">
             <div className="search__wrapper">
                 <h2 className="search__title">Что творится в мире?</h2>
@@ -15,7 +14,7 @@ function Search() {
                 <SearchForm />
             </div>
         </section>
-    );
+  );
 }
 
 export default Search;
