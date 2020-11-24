@@ -11,7 +11,7 @@ function NewsCard({
             <Switch>
                 <Route path="/main">
                     <div className="search-results__save-button-wrapper">
-                        <div type='button' className="search-results__save-button"></div>
+                        <button type='button' className="search-results__save-button"></button>
                         <div className="search-results__save-button-description">
                             <p className="search-results__save-button-description-text">Войдите, чтобы сохранять статьи</p>
                         </div>
