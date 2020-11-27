@@ -39,7 +39,7 @@ function Header({ onRegister, onBurgerMenu }) {
             </Link>
             <button type='button' className="header__logged-out-button">
               Андрей
-              <img className="header__logged-out-image" src={logout} alt="здесь должна быть выхода из аккаунта"></img>
+              <img className="header__logged-out-image" src={logout} alt="здесь должна быть иконка выхода из аккаунта"></img>
             </button>
           </div>
         </header>
