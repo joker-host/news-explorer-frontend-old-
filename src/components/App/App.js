@@ -1,7 +1,5 @@
 import './App.css';
 
-import React, { useState } from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
 import Header from '../Header/Header.js';
 import Main from '../Main/Main.js';
 import Footer from '../Footer/Footer.js';
@@ -10,8 +8,52 @@ import RegisterPopup from '../RegisterPopup/RegisterPopup.js';
 import LoginPopup from '../LoginPopup/LoginPopup.js';
 import BurgerPopup from '../BurgerPopup/BurgerPopup.js';
 import InfoTooltip from '../InfoTooltip/InfoTooltip.js';
+import { newsApi } from '../../utils/NewsApi.js';
+
+import React, { useState, useEffect } from 'react';
+import { Route, Switch, Redirect } from 'react-router-dom';
+const moment = require('moment');
+import 'moment/locale/ru';
 
 function App() {
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  // let localKeyWord = localStorage.getItem('key word');
+  const [keyWord, setKeyWord] = useState('');
+  const [articles, setArticles] = useState(null);
+  function onSubmitSearchForm(e) {
+    setIsLoading(true);
+    e.preventDefault();
+    newsApi.getArticles(keyWord)
+      .then((res) => {
+        setIsLoading(false);
+        console.log(res);
+      })
+  }
+  // useEffect(() => {
+  //   // let dateFrom = moment(Date.now() - 7 * 24 * 3600 * 1000).format('LLL');
+  //   let dateFrom = moment(Date.now() - 7 * 24 * 3600 * 1000).format('LLL');
+  //   // console.log(localStorage.getItem('key word'));
+  //   if(keyWord !== null) {
+  //     newsApi.getArticles()
+  //     .then((res) => {
+  //       console.log(res);
+  //     })
+  //   }
+  // }, []);
+
+  // moment().format('LT');   // 12:58 PM
+  // moment().format('LTS');  // 12:58:04 PM
+  // moment().format('L');    // 11/27/2020
+  // moment().format('l');    // 11/27/2020
+  // moment().format('LL');   // November 27, 2020
+  // moment().format('ll');   // Nov 27, 2020
+  // moment().format('LLL');  // November 27, 2020 12:58 PM
+  // moment().format('lll');  // Nov 27, 2020 12:58 PM
+  // moment().format('LLLL'); // Friday, November 27, 2020 12:58 PM
+  // moment().format('llll'); // Fri, Nov 27, 2020 12:59 PM
+
   function closeOverlay(evt) { // закрытие попапов при нажатии на область вокруг попапа
     if (evt.target.classList.contains('popup_opened')) {
       closeAllPopups();
@@ -74,21 +116,21 @@ function App() {
     <div className="body">
       <Switch>
         <Route path="/main">
-          <Header onRegister={handleLoginPopup} onBurgerMenu={handleBurgerPopup}/>
-          <Main/>
-          <Footer/>
+          <Header onRegister={handleLoginPopup} onBurgerMenu={handleBurgerPopup} />
+          <Main setKeyWord={setKeyWord} onSubmitSearchForm={onSubmitSearchForm} isLoading={isLoading}/>
+          <Footer />
         </Route>
         <Route path="/saved-news">
-          <Header onRegister={handleLoginPopup} onBurgerMenu={handleBurgerPopup}/>
-          <SavedNews/>
-          <Footer/>
+          <Header onRegister={handleLoginPopup} onBurgerMenu={handleBurgerPopup} />
+          <SavedNews />
+          <Footer />
         </Route>
-        <Redirect from='/' to='/main'/>
+        <Redirect from='/' to='/main' />
       </Switch>
-      <RegisterPopup isOpen={isRegisterPopupOpen} onClose={closeAllPopups} onToggle={toggleRegisterPopup}/>
-      <LoginPopup onEscape={closeAllPopups} isOpen={isLoginPopupOpen} onClose={closeAllPopups} onToggle={toggleLoginPopup}/>
-      <BurgerPopup isOpen={isBurgerPopupOpen} onRegister={handleLoginPopup} onCloseBurger={closeAllPopups}/>
-      <InfoTooltip isOpen={isToolipPopupOpen} onClose={closeAllPopups} onToggle={toggleToolipPopup}/>
+      <RegisterPopup isOpen={isRegisterPopupOpen} onClose={closeAllPopups} onToggle={toggleRegisterPopup} />
+      <LoginPopup onEscape={closeAllPopups} isOpen={isLoginPopupOpen} onClose={closeAllPopups} onToggle={toggleLoginPopup} />
+      <BurgerPopup isOpen={isBurgerPopupOpen} onRegister={handleLoginPopup} onCloseBurger={closeAllPopups} />
+      <InfoTooltip isOpen={isToolipPopupOpen} onClose={closeAllPopups} onToggle={toggleToolipPopup} />
     </div>
   );
 }
