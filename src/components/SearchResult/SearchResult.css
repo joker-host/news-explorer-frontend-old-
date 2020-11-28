@@ -53,9 +53,12 @@
 /* media */
 /* media */
 
-@media (max-width: 1280px) {
+@media (max-width: 1250px) {
     .search-results__header {
         margin: 0 0 64px 0;
+    }
+    .search-results__cards {
+        grid-template-columns: repeat(2, min-content);
     }
 }
 
@@ -93,12 +96,6 @@
         opacity: 1;
         outline: none;
         background-color: #FFFFFF;
-    }
-}
-
-@media (max-width: 767px) {
-    .search-results__cards {
-        grid-template-columns: repeat(2, min-content);
     }
 }
 

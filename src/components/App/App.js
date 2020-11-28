@@ -28,6 +28,7 @@ function App() {
     newsApi.getArticles(keyWord)
       .then((res) => {
         setIsLoading(false);
+        setArticles({articlesArr: res.articles, itemToShow: 3});
         console.log(res);
       })
   }
@@ -117,7 +118,13 @@ function App() {
       <Switch>
         <Route path="/main">
           <Header onRegister={handleLoginPopup} onBurgerMenu={handleBurgerPopup} />
-          <Main setKeyWord={setKeyWord} onSubmitSearchForm={onSubmitSearchForm} isLoading={isLoading}/>
+          <Main 
+            setKeyWord={setKeyWord} 
+            onSubmitSearchForm={onSubmitSearchForm} 
+            isLoading={isLoading}
+            articles={articles}
+            setArticles={setArticles}
+          />
           <Footer />
         </Route>
         <Route path="/saved-news">

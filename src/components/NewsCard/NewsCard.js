@@ -3,10 +3,10 @@ import './NewsCard.css';
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-function NewsCard({
-  cardImage, cardDate, cardTitle, cardDescription, cardTag,
-}) {
-  return (
+function NewsCard({ cardImage, cardDate, cardTitle, cardDescription, cardTag, onClickArticle }) {
+    const yandex = 'https://yandex.ru'
+
+    return (
         <div className="search-results__card">
             <Switch>
                 <Route path="/main">
@@ -31,14 +31,15 @@ function NewsCard({
             </Switch>
 
             <img className="search-results__image" src={cardImage} alt="здесь должна быть картинка для новости :)"></img>
-            <a className="search-results__card-wrapper" href="#">
+            <div className="search-results__card-wrapper">
+                <a className="search-results__card-link" href={onClickArticle} target="_blank" rel="noreferrer"></a>
                 <p className="search-results__date">{cardDate}</p>
                 <h3 className="search-results__card-title">{cardTitle}</h3>
                 <p className="search-results__card-description">{cardDescription}</p>
                 <p className="search-results__card-source">{cardTag}</p>
-            </a>
+            </div>
         </div>
-  );
+    );
 }
 
 export default NewsCard;

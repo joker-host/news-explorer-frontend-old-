@@ -12,7 +12,7 @@ const handleResponse = (result) => {
 
 class NewsApi {
     getArticles(keyWord) {
-        return fetch(`https://newsapi.org/v2/everything?q=${keyWord}&from=${dateFrom}&to=${dateNow}&pageSize=100&sortBy=popularity&language=ru&apiKey=a349bbe623754e8cafb460c57b8ce4f1`,
+        return fetch(`https://newsapi.org/v2/everything?q=${keyWord}&from=${dateFrom}&to=${dateNow}&pageSize=100&language=ru&apiKey=2dc416e57caa4931a4f1163e0f3bee2a`,
             {
                 method: 'GET',
                 headers: {
