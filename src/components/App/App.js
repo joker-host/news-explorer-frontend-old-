@@ -21,15 +21,15 @@ function App() {
 
   // let localKeyWord = localStorage.getItem('key word');
   const [keyWord, setKeyWord] = useState('');
-  const [articles, setArticles] = useState(null);
+  const [articles, setArticles] = useState({articlesArr: [], showSection: false});
   function onSubmitSearchForm(e) {
     setIsLoading(true);
     e.preventDefault();
     newsApi.getArticles(keyWord)
       .then((res) => {
         setIsLoading(false);
-        setArticles({articlesArr: res.articles, itemToShow: 3});
-        console.log(res);
+        setArticles({articlesArr: res.articles, itemToShow: 3, showSection: true});
+        // console.log(res);
       })
   }
   // useEffect(() => {

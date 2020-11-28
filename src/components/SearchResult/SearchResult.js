@@ -4,33 +4,43 @@ import placeholderImage from '../../images/news_1.png';
 
 import NewsCard from '../NewsCard/NewsCard';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 const moment = require('moment');
 import 'moment/locale/ru';
 
-function SearchResult({ articles, setArticles }) {
+function SearchResult({ articles, setArticles, isLoading }) {
 
-    function showMore() {
-        setArticles({articlesArr: articles.articlesArr, itemToShow: articles.itemToShow + 3});
-        console.log(articles)
+    const [esleButtonShow, setEsleButtonShow] = useState(true);
+
+    function checkArrayLength() {
+        if (articles.itemToShow >= articles.articlesArr.length) {
+            setEsleButtonShow(false);
+        }
     }
 
-    // function showMore() {
-    //     setArticles({itemToShow: articles.itemToShow + 3});
-    //     console.log(articles)
-    // }
+    function showMore() {
+        checkArrayLength();
+        setArticles({ articlesArr: articles.articlesArr, itemToShow: articles.itemToShow + 3, showSection: true });
+        checkArrayLength();
+    }
 
-    // function test() {
-    //     console.log(articles)
-    // }
+    useEffect(() => {
+        checkArrayLength();
+        console.log(articles)
+    }, [articles]);
+
+    function test() {
+        console.log(1);
+    }
+
     return (
         <Switch>
             <Route path="/main">
-                {articles ?
+                {articles.showSection ?
                     <section className="search-results">
-                        <h2 className="search-results__header" onClick={showMore}>Результаты поиска</h2>
+                        <h2 className="search-results__header" onClick={test}>Результаты поиска</h2>
                         <div className="search-results__cards">
                             {
                                 articles.articlesArr.slice(0, articles.itemToShow).map(({ description, publishedAt, urlToImage, title, author, url }) =>
@@ -38,7 +48,6 @@ function SearchResult({ articles, setArticles }) {
                                     <NewsCard
                                         key={title + description + publishedAt}
                                         cardImage={urlToImage ? urlToImage : placeholderImage}
-                                        // cardDate={props.publishedAt}
                                         cardDate={moment(publishedAt).format('LL')}
                                         cardTitle={title}
                                         cardDescription={description}
@@ -47,7 +56,9 @@ function SearchResult({ articles, setArticles }) {
                                     />)
                             }
                         </div>
-                        <button className="search-results__else-news-button" onClick={showMore}>Показать еще</button>
+                        {
+                            esleButtonShow ? <button className="search-results__else-news-button" onClick={showMore}>Показать еще</button> : ''
+                        }
                     </section>
                     : ''
                 }
