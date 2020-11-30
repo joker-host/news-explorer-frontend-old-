@@ -164,6 +164,39 @@
     margin-left: 5px;
 }
 
+.header__logged-out-button_white {
+    
+    display: flex;
+    align-items: center;
+    color: inherit;
+    background-image: none;
+    background: transparent;
+    cursor: pointer;
+    width: auto;
+    padding: 8px 12px;
+    height: 48px;
+    border: 1px solid #FFFFFF;
+    border-radius: 100px;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 24px;
+    transition: 0.3s ease;
+}
+
+.header__logged-out-button_white:hover {
+    opacity: .7;
+}
+
+.header__logged-out-button_white:focus {
+    outline: none;
+}
+
+.header__logged-out-button_white:active {
+    opacity: 1;
+    border: 1px solid #ffa6a6;
+    border-radius: 100px;
+}
+
 /* media */
 /* media */
 /* media */
@@ -228,6 +261,15 @@
     .header__logged-out-button:active {
         opacity: 1;
         border: 1px solid  #1A1B22;
+    }
+
+    .header__logged-out-button_white:hover {
+        opacity: 1;
+    }
+
+    .header__logged-out-button_white:active {
+        opacity: 1;
+        border: 1px solid  #FFFFFF;
     }
 }
 

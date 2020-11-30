@@ -1,12 +1,14 @@
 import './Header.css';
 
-import React from 'react';
-import { Route, Switch, Link } from 'react-router-dom';
 import logout from '../../images/logout.svg';
+import logout_white from '../../images/logout-white.svg';
 import menu_white from '../../images/menu_white.svg';
 import menu_black from '../../images/menu_black.svg';
 
-function Header({ onRegister, onBurgerMenu }) {
+import React from 'react';
+import { Route, Switch, Link } from 'react-router-dom';
+
+function Header({ onRegister, onBurgerMenu, loggedIn, articles }) {
   return (
     <Switch>
       <Route path="/main">
@@ -20,8 +22,15 @@ function Header({ onRegister, onBurgerMenu }) {
               <div className="header__underline"></div>
               Главная
             </Link>
-            <Link className="header__link" to="/saved-news">Сохраненные статьи</Link>
-            <button type='button' className="header__logged-in-button" onClick={onRegister}>Авторизоваться</button>
+            {loggedIn ? <Link className="header__link" to="/saved-news" onClick={console.log(articles)}>Сохраненные статьи</Link> : ''}
+            { loggedIn ?
+              <button type='button' className="header__logged-out-button_white">
+                Андрей
+                <img className="header__logged-out-image" src={logout_white} alt="здесь должна быть иконка выхода из аккаунта"></img>
+              </button> 
+              : 
+              <button type='button' className="header__logged-in-button" onClick={onRegister}>Авторизоваться</button>
+            }
           </div>
         </header>
       </Route>
