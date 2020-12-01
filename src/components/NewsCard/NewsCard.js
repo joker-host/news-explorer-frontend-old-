@@ -73,7 +73,7 @@ function NewsCard({
       </img>
       <div className="search-results__card-wrapper">
         <a className="search-results__card-link" href={onClickArticle} target="_blank" rel="noreferrer"></a>
-        <p className="search-results__date">{moment(cardDate).format('LL').replace('$1, $2').slice(0, -3)}</p>
+        <p className="search-results__date">{moment(cardDate).format('LL').slice(0, -3)}</p>
         <h3 className="search-results__card-title">{cardTitle}</h3>
         <p className="search-results__card-description">{cardDescription}</p>
         <p className="search-results__card-source">{cardTag}</p>
