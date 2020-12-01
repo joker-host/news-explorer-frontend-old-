@@ -6,12 +6,12 @@ import SearchResult from '../SearchResult/SearchResult';
 
 // import { Route, Link, useHistory } from 'react-router-dom';
 
-function SavedNews() {
+function SavedNews({articles, setArticles, savedArticles}) {
   return (
-        <main className="content">
-            <SavedNewsHeader />
-            <SearchResult />
-        </main>
+    <main className="content">
+      <SavedNewsHeader />
+      <SearchResult articles={articles} setArticles={setArticles} savedArticles={savedArticles}/>
+    </main>
   );
 }
 

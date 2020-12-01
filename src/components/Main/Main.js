@@ -7,11 +7,11 @@ import NoResults from '../NoResults/NoResults';
 import Search from '../Search/Search';
 import SearchResult from '../SearchResult/SearchResult';
 
-function Main({ setKeyWord, onSubmitSearchForm, isLoading, articles, setArticles }) {
+function Main({ setKeyWord, keyWord, onSubmitSearchForm, isLoading, articles, setArticles, loggedIn, savedArticles }) {
   return (
     <main className="content">
       <Search setKeyWord={setKeyWord} onSubmitSearchForm={onSubmitSearchForm}/>
-      <SearchResult articles={articles} setArticles={setArticles}/>
+      <SearchResult articles={articles} setArticles={setArticles} loggedIn={loggedIn} keyWord={keyWord} savedArticles={savedArticles}/>
       {isLoading ? <Preloader/> : ''}
       <NoResults />
       <About />
