@@ -57,6 +57,32 @@ class MainApi {
         console.log(err);
       });
   }
+<<<<<<< HEAD
+=======
+
+  saveArticle(keyword, title, text, date, source, link, image, owner) {
+    return fetch(`${baseUrl}/articles`, {
+      method: 'POST',
+      // mode: 'no-cors',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${localStorage.getItem('jwt')}`,
+      },
+      body: JSON.stringify({ keyword, title, text, date, source, link, image, owner }),
+    }).then(handleResponse);
+  }
+
+  getInitialArticles() {
+    return fetch(`${baseUrl}/articles`, {
+      method: 'GET',
+      // mode: 'no-cors',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${localStorage.getItem('jwt')}`,
+      },
+    }).then(handleResponse);
+  }
+>>>>>>> 464b370cd969a3ff8b3b12f6f04a1960d547e683
 }
 
 const mainApi = new MainApi();

@@ -63,7 +63,7 @@
     background-image: url(./../../images/save_button_hover.svg);
 }
 
-.search-results__save-button:hover ~ .search-results__save-button-description {
+.search-results__save-button:disabled:hover ~ .search-results__save-button-description {
     opacity: 1;
     visibility: visible;
 }
@@ -79,6 +79,11 @@
 .search-results__save-button:active {
     outline: none;
 }
+
+/* .search-results__save-button:disabled ~ .search-results__save-button-description {
+    opacity: 1;
+    visibility: visible;
+} */
 
 .search-results__delete {
     background-image: url(./../../images/delete.svg);

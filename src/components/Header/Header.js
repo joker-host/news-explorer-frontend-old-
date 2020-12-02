@@ -22,7 +22,11 @@ function Header({ onRegister, onBurgerMenu, loggedIn, articles }) {
               <div className="header__underline"></div>
               Главная
             </Link>
+<<<<<<< HEAD
             {loggedIn ? <Link className="header__link" to="/saved-news" onClick={console.log(articles)}>Сохраненные статьи</Link> : ''}
+=======
+            {loggedIn ? <Link className="header__link" to="/saved-news">Сохраненные статьи</Link> : ''}
+>>>>>>> 464b370cd969a3ff8b3b12f6f04a1960d547e683
             { loggedIn ?
               <button type='button' className="header__logged-out-button_white">
                 Андрей

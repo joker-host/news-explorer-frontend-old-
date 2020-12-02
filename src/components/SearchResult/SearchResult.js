@@ -10,7 +10,7 @@ import { Route, Switch } from 'react-router-dom';
 const moment = require('moment');
 import 'moment/locale/ru';
 
-function SearchResult({ articles, setArticles, isLoading }) {
+function SearchResult({ articles, setArticles, loggedIn, keyWord, isLoading, savedArticles }) {
 
   const [esleButtonShow, setEsleButtonShow] = useState(true);
 
@@ -33,7 +33,11 @@ function SearchResult({ articles, setArticles, isLoading }) {
   useEffect(() => {
     checkArrayLength();
     if (articles.articlesArr.length > 0) {
+<<<<<<< HEAD
       localStorage.setItem("articles", JSON.stringify({articlesArr: articles.articlesArr, itemToShow: articles.itemToShow, showSection: articles.showSection}))
+=======
+      localStorage.setItem("articles", JSON.stringify({ articlesArr: articles.articlesArr, itemToShow: articles.itemToShow, showSection: articles.showSection }))
+>>>>>>> 464b370cd969a3ff8b3b12f6f04a1960d547e683
     }
   }, [articles]);
 
@@ -61,12 +65,22 @@ function SearchResult({ articles, setArticles, isLoading }) {
                     <NewsCard
                       key={url}
                       cardImage={urlToImage ? urlToImage : placeholderImage}
+<<<<<<< HEAD
                       cardDate={moment(publishedAt).format('LL')}
+=======
+                      cardDate={publishedAt}
+>>>>>>> 464b370cd969a3ff8b3b12f6f04a1960d547e683
                       cardTitle={title}
                       cardDescription={description}
                       cardTag={author || 'Без указания источника'}
                       onClickArticle={url}
+<<<<<<< HEAD
                     />)
+=======
+                      loggedIn={loggedIn}
+                    />)
+                // console.log(savedArticles)
+>>>>>>> 464b370cd969a3ff8b3b12f6f04a1960d547e683
               }
             </div>
             {
@@ -79,6 +93,7 @@ function SearchResult({ articles, setArticles, isLoading }) {
       <Route path="/saved-news">
         <section className="search-results">
           <div className="search-results__cards">
+<<<<<<< HEAD
             {/* <NewsCard
               cardImage={placeholderImage}
               cardDate={'2 августа, 2019'}
@@ -107,6 +122,24 @@ function SearchResult({ articles, setArticles, isLoading }) {
               cardDescription={'Фотограф отвлеклась от освещения суровой политической реальности Мексики, чтобы запечатлеть ускользающую красоту одного из местных чудес природы.'}
               cardTag={'Медуза'}
             /> */}
+=======
+            {
+              // console.log(savedArticles)
+              savedArticles.map(({ date, image, keyword, link, source, text, title, _id }) =>
+                <NewsCard
+                  key={_id}
+                  // cardImage={urlToImage ? urlToImage : placeholderImage}
+                  cardImage={image}
+                  cardDate={date}
+                  cardTitle={title}
+                  cardDescription={text}
+                  cardTag={source || 'Без указания источника'}
+                  onClickArticle={link}
+                  keyWord={keyword}
+                  // loggedIn={loggedIn}
+                />)
+            }
+>>>>>>> 464b370cd969a3ff8b3b12f6f04a1960d547e683
           </div>
         </section>
       </Route>

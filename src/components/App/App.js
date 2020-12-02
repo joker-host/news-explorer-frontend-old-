@@ -10,11 +10,20 @@ import BurgerPopup from '../BurgerPopup/BurgerPopup.js';
 import InfoTooltip from '../InfoTooltip/InfoTooltip.js';
 import { newsApi } from '../../utils/NewsApi.js';
 import { mainApi } from '../../utils/MainApi.js';
+<<<<<<< HEAD
 
 import React, { useState, useEffect } from 'react';
 import { Route, Switch, Redirect, useHistory } from 'react-router-dom';
 const moment = require('moment');
 import 'moment/locale/ru';
+=======
+import { UserContext } from '../../contexts/CurrentUserContext.js';
+
+import React, { useState, useEffect } from 'react';
+import { Route, Switch, Redirect, useHistory } from 'react-router-dom';
+// const moment = require('moment');
+// import 'moment/locale/ru';
+>>>>>>> 464b370cd969a3ff8b3b12f6f04a1960d547e683
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -26,8 +35,11 @@ function App() {
   const [currentUser, setCurrentUser] = useState({
     // хук, содержащий информцию о пользователе
     name: '',
+<<<<<<< HEAD
     about: '',
     avatar: '',
+=======
+>>>>>>> 464b370cd969a3ff8b3b12f6f04a1960d547e683
     _id: '',
   });
   const tokenCheck = () => {
@@ -37,10 +49,16 @@ function App() {
         .getContent(jwt)
         .then((res) => {
           if (res) {
+<<<<<<< HEAD
             setCurrentUser(res);
             setLoggedIn(true);
             // setUserEmail(res.email);
             history.push('/saved-news');
+=======
+            setCurrentUser({name: res.name, _id: res._id});
+            setLoggedIn(true);
+            // history.push('/saved-news');
+>>>>>>> 464b370cd969a3ff8b3b12f6f04a1960d547e683
           } else {
             setLoggedIn(false);
             localStorage.removeItem('jwt');
@@ -57,18 +75,62 @@ function App() {
   }, [loggedIn, history]);
 
   const [keyWord, setKeyWord] = useState('');
-  const [articles, setArticles] = useState({articlesArr: [], showSection: false});
+  const [articles, setArticles] = useState({ articlesArr: [], showSection: false });
   function onSubmitSearchForm(e) {
     setIsLoading(true);
     e.preventDefault();
-    newsApi.getArticles(keyWord)
+    newsApi
+      .getArticles(keyWord)
       .then((res) => {
+        localStorage.setItem("keyWordForSave", keyWord)
         setIsLoading(false);
+<<<<<<< HEAD
         setArticles({articlesArr: res.articles, itemToShow: 3, showSection: true});
         localStorage.setItem("articles", JSON.stringify({articlesArr: res.articles, itemToShow: articles.itemToShow, showSection: articles.showSection}))
         // console.log(res);
       })
   }
+=======
+        setArticles({ articlesArr: res.articles, itemToShow: 3, showSection: true });
+        localStorage.setItem("articles", JSON.stringify({ articlesArr: res.articles, itemToShow: articles.itemToShow, showSection: articles.showSection }))
+        // console.log(res);
+      })
+  }
+
+  // function handleCardLike(props) {
+  //   //лайк/дизлайк карточки
+  //   const isSaved = props.likes.some((i) => i === currentUser._id);
+  //   const cardCallback = (newCard) => {
+  //     const newCards = cards.map((item) => (item._id === props._id ? newCard : item));
+  //     setCards(newCards);
+  //     setIsLoading(false);
+  //   };
+
+  //   if (!isSaved) {
+  //     api.likeCards(props._id).then(cardCallback);
+  //   } else {
+  //     api.disLikeCards(props._id).then(cardCallback);
+  //   }
+  // }
+
+  const [savedArticles, setSavedArticles] = useState([]);
+
+  function loadSavedArticles() {
+    mainApi
+      .getInitialArticles()
+      .then((res) => {
+        setSavedArticles(res)
+        // console.log(savedArticles)
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
+
+  useEffect(() => {
+    loadSavedArticles();
+  }, [articles]);
+>>>>>>> 464b370cd969a3ff8b3b12f6f04a1960d547e683
 
   // moment().format('LT');   // 12:58 PM
   // moment().format('LTS');  // 12:58:04 PM
@@ -132,7 +194,11 @@ function App() {
   }
 
 
+<<<<<<< HEAD
   const [registerMessage, setRegisterMessage] = useState({ 
+=======
+  const [registerMessage, setRegisterMessage] = useState({
+>>>>>>> 464b370cd969a3ff8b3b12f6f04a1960d547e683
     message: '',
     validation: {
       body: {
@@ -151,6 +217,7 @@ function App() {
   }
 
   return (
+<<<<<<< HEAD
     <div className="body">
       <Switch>
         <Route path="/main">
@@ -197,6 +264,59 @@ function App() {
         resultMessage={registerMessage}
       />
     </div>
+=======
+    <UserContext.Provider value={currentUser}>
+      <div className="body">
+        <Switch>
+          <Route path="/main">
+            <Header onRegister={handleLoginPopup} onBurgerMenu={handleBurgerPopup} loggedIn={loggedIn} />
+            <Main
+              setKeyWord={setKeyWord}
+              keyWord={keyWord}
+              onSubmitSearchForm={onSubmitSearchForm}
+              isLoading={isLoading}
+              articles={articles}
+              setArticles={setArticles}
+              loggedIn={loggedIn}
+              savedArticles={savedArticles}
+            />
+            <Footer />
+          </Route>
+          <Route path="/saved-news">
+            <Header onRegister={handleLoginPopup} onBurgerMenu={handleBurgerPopup} loggedIn={loggedIn} />
+            <SavedNews articles={articles} setArticles={setArticles} savedArticles={savedArticles}/>
+            <Footer />
+          </Route>
+          <Redirect from='/' to='/main' />
+        </Switch>
+        <RegisterPopup
+          isOpen={isRegisterPopupOpen}
+          onClose={closeAllPopups}
+          onToggle={toggleRegisterPopup}
+          setIsToolipPopupOpen={setIsToolipPopupOpen}
+          setRegisterMessage={setRegisterMessage}
+        />
+        <LoginPopup
+          onEscape={closeAllPopups}
+          isOpen={isLoginPopupOpen}
+          onClose={closeAllPopups}
+          onToggle={toggleLoginPopup}
+          handleLogin={handleLogin}
+        />
+        <BurgerPopup
+          isOpen={isBurgerPopupOpen}
+          onRegister={handleLoginPopup}
+          onCloseBurger={closeAllPopups}
+        />
+        <InfoTooltip
+          isOpen={isToolipPopupOpen}
+          onClose={handleToolipPopup}
+          onToggle={toggleToolipPopup}
+          resultMessage={registerMessage}
+        />
+      </div>
+    </UserContext.Provider>
+>>>>>>> 464b370cd969a3ff8b3b12f6f04a1960d547e683
   );
 }
 
