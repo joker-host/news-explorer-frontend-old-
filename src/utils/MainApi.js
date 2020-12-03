@@ -10,12 +10,8 @@ class MainApi {
       },
       body: JSON.stringify({ email, password, name }),
     })
-      .then((res) => {
-        return res.json();
-      })
-      .then((res) => {
-        return res;
-      })
+      .then((res) => res.json())
+      .then((res) => res)
       .catch((err) => {
         console.log(err);
       });
@@ -49,16 +45,12 @@ class MainApi {
         authorization: `Bearer ${token}`,
       },
     })
-      .then((res) => {
-        return res.json();
-      })
+      .then((res) => res.json())
       .then((data) => data)
       .catch((err) => {
         console.log(err);
       });
   }
-<<<<<<< HEAD
-=======
 
   saveArticle(keyword, title, text, date, source, link, image, owner) {
     return fetch(`${baseUrl}/articles`, {
@@ -68,7 +60,20 @@ class MainApi {
         'Content-Type': 'application/json',
         authorization: `Bearer ${localStorage.getItem('jwt')}`,
       },
-      body: JSON.stringify({ keyword, title, text, date, source, link, image, owner }),
+      body: JSON.stringify({
+        keyword, title, text, date, source, link, image, owner,
+      }),
+    }).then(handleResponse);
+  }
+
+  deleteArticle(idCard) {
+    return fetch(`${baseUrl}/articles/${idCard}`, {
+      method: 'DELETE',
+      // mode: 'no-cors',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${localStorage.getItem('jwt')}`,
+      },
     }).then(handleResponse);
   }
 
@@ -82,7 +87,6 @@ class MainApi {
       },
     }).then(handleResponse);
   }
->>>>>>> 464b370cd969a3ff8b3b12f6f04a1960d547e683
 }
 
 const mainApi = new MainApi();

@@ -1,5 +1,10 @@
 import './App.css';
 
+import React, { useState, useEffect } from 'react';
+import {
+  Route, Switch, Redirect, useHistory,
+} from 'react-router-dom';
+import validator from 'validator';
 import Header from '../Header/Header.js';
 import Main from '../Main/Main.js';
 import Footer from '../Footer/Footer.js';
@@ -8,71 +13,65 @@ import RegisterPopup from '../RegisterPopup/RegisterPopup.js';
 import LoginPopup from '../LoginPopup/LoginPopup.js';
 import BurgerPopup from '../BurgerPopup/BurgerPopup.js';
 import InfoTooltip from '../InfoTooltip/InfoTooltip.js';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute.js';
 import { newsApi } from '../../utils/NewsApi.js';
 import { mainApi } from '../../utils/MainApi.js';
-<<<<<<< HEAD
-
-import React, { useState, useEffect } from 'react';
-import { Route, Switch, Redirect, useHistory } from 'react-router-dom';
-const moment = require('moment');
-import 'moment/locale/ru';
-=======
 import { UserContext } from '../../contexts/CurrentUserContext.js';
 
-import React, { useState, useEffect } from 'react';
-import { Route, Switch, Redirect, useHistory } from 'react-router-dom';
-// const moment = require('moment');
-// import 'moment/locale/ru';
->>>>>>> 464b370cd969a3ff8b3b12f6f04a1960d547e683
-
 function App() {
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(localStorage.isLoggedIn);
   const handleLogin = () => {
-    setLoggedIn(true);
+    setLoggedIn(localStorage.isLoggedIn = true);
   };
 
   const history = useHistory();
   const [currentUser, setCurrentUser] = useState({
     // хук, содержащий информцию о пользователе
     name: '',
-<<<<<<< HEAD
-    about: '',
-    avatar: '',
-=======
->>>>>>> 464b370cd969a3ff8b3b12f6f04a1960d547e683
     _id: '',
   });
-  const tokenCheck = () => {
+  function tokenCheck() {
     const jwt = localStorage.getItem('jwt');
     if (jwt) {
       mainApi
         .getContent(jwt)
         .then((res) => {
           if (res) {
-<<<<<<< HEAD
-            setCurrentUser(res);
-            setLoggedIn(true);
-            // setUserEmail(res.email);
-            history.push('/saved-news');
-=======
-            setCurrentUser({name: res.name, _id: res._id});
-            setLoggedIn(true);
-            // history.push('/saved-news');
->>>>>>> 464b370cd969a3ff8b3b12f6f04a1960d547e683
+            setCurrentUser({ name: res.name, _id: res._id });
+            setLoggedIn(localStorage.isLoggedIn = true);
           } else {
-            setLoggedIn(false);
             localStorage.removeItem('jwt');
           }
         })
         .catch((err) => {
           console.log(err);
         });
+    } else {
+      setLoggedIn(localStorage.isLoggedIn = false);
     }
-  };
+  }
+
+  function logOut() {
+    localStorage.removeItem('jwt');
+    setLoggedIn(localStorage.isLoggedIn = false);
+  }
+
+  const [savedArticles, setSavedArticles] = useState([]);
+
+  function loadSavedArticles() {
+    mainApi
+      .getInitialArticles()
+      .then((res) => {
+        setSavedArticles(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 
   useEffect(() => {
-    tokenCheck();
-  }, [loggedIn, history]);
+    loadSavedArticles();
+  }, []);
 
   const [keyWord, setKeyWord] = useState('');
   const [articles, setArticles] = useState({ articlesArr: [], showSection: false });
@@ -82,66 +81,16 @@ function App() {
     newsApi
       .getArticles(keyWord)
       .then((res) => {
-        localStorage.setItem("keyWordForSave", keyWord)
+        localStorage.setItem('keyWordForSave', keyWord.charAt(0).toUpperCase() + keyWord.slice(1));
         setIsLoading(false);
-<<<<<<< HEAD
-        setArticles({articlesArr: res.articles, itemToShow: 3, showSection: true});
-        localStorage.setItem("articles", JSON.stringify({articlesArr: res.articles, itemToShow: articles.itemToShow, showSection: articles.showSection}))
-        // console.log(res);
-      })
-  }
-=======
         setArticles({ articlesArr: res.articles, itemToShow: 3, showSection: true });
-        localStorage.setItem("articles", JSON.stringify({ articlesArr: res.articles, itemToShow: articles.itemToShow, showSection: articles.showSection }))
-        // console.log(res);
-      })
-  }
-
-  // function handleCardLike(props) {
-  //   //лайк/дизлайк карточки
-  //   const isSaved = props.likes.some((i) => i === currentUser._id);
-  //   const cardCallback = (newCard) => {
-  //     const newCards = cards.map((item) => (item._id === props._id ? newCard : item));
-  //     setCards(newCards);
-  //     setIsLoading(false);
-  //   };
-
-  //   if (!isSaved) {
-  //     api.likeCards(props._id).then(cardCallback);
-  //   } else {
-  //     api.disLikeCards(props._id).then(cardCallback);
-  //   }
-  // }
-
-  const [savedArticles, setSavedArticles] = useState([]);
-
-  function loadSavedArticles() {
-    mainApi
-      .getInitialArticles()
-      .then((res) => {
-        setSavedArticles(res)
-        // console.log(savedArticles)
-      })
-      .catch((err) => {
-        console.log(err);
-      })
+        localStorage.setItem('articles', JSON.stringify({ articlesArr: res.articles, itemToShow: articles.itemToShow, showSection: articles.showSection }));
+      });
   }
 
   useEffect(() => {
-    loadSavedArticles();
-  }, [articles]);
->>>>>>> 464b370cd969a3ff8b3b12f6f04a1960d547e683
-
-  // moment().format('LT');   // 12:58 PM
-  // moment().format('LTS');  // 12:58:04 PM
-  // moment().format('L');    // 11/27/2020
-  // moment().format('l');    // 11/27/2020
-  // moment().format('LL');   // November 27, 2020
-  // moment().format('ll');   // Nov 27, 2020
-  // moment().format('LLL');  // November 27, 2020 12:58 PM
-  // moment().format('lll');  // Nov 27, 2020 12:58 PM
-  // moment().format('LLLL'); // Friday, November 27, 2020 12:58 PM
-  // moment().format('llll'); // Fri, Nov 27, 2020 12:59 PM
+    tokenCheck();
+  }, [loggedIn, history]);
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -160,30 +109,34 @@ function App() {
   document.addEventListener('keydown', closeOnEscape);
 
   function closeAllPopups() { // закрывает все попапы
+    resetError();
     setIsRegisterPopupOpen(false);
     setIsLoginPopupOpen(false);
     setIsBurgerPopupOpen(false);
-    // setIsToolipPopupOpen(false);
     document.removeEventListener('keydown', closeOnEscape);
     document.removeEventListener('click', closeOverlay);
   }
 
   const [isRegisterPopupOpen, setIsRegisterPopupOpen] = useState(false);
   function handleRegisterPopup() { // открывает попап регистрации
+    resetError();
     setIsRegisterPopupOpen(true);
   }
 
   const [isLoginPopupOpen, setIsLoginPopupOpen] = useState(false);
   function handleLoginPopup() { // открывает попап логина
+    resetError();
     setIsLoginPopupOpen(true);
   }
 
   function toggleLoginPopup() { // закрывает попап логина и открывает попап регистрации
+    resetError();
     closeAllPopups();
     handleRegisterPopup();
   }
 
   function toggleRegisterPopup() { // закрывает попап регистрации и открывает попап логина
+    resetError();
     closeAllPopups();
     handleLoginPopup();
   }
@@ -193,83 +146,123 @@ function App() {
     setIsBurgerPopupOpen(true);
   }
 
-
-<<<<<<< HEAD
-  const [registerMessage, setRegisterMessage] = useState({ 
-=======
   const [registerMessage, setRegisterMessage] = useState({
->>>>>>> 464b370cd969a3ff8b3b12f6f04a1960d547e683
     message: '',
     validation: {
       body: {
-        message: ''
-      }
-    }
+        message: '',
+      },
+    },
   });
-  const [isToolipPopupOpen, setIsToolipPopupOpen] = useState(false)
+
+  const [isToolipPopupOpen, setIsToolipPopupOpen] = useState(false);
   function handleToolipPopup() { // закрывает информационное окно
     setIsToolipPopupOpen(false);
   }
 
   function toggleToolipPopup() { // закрывает попап регистрации и открывает попап логина
+    resetError();
     handleToolipPopup();
     setIsLoginPopupOpen(true);
   }
 
+  /// //////////////////////////////////////валидация
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [name, setName] = useState('');
+
+  const [emailDirty, setEmailDirty] = useState(false);
+  const [emailError, setEmailError] = useState('Поле Email не может быть пустым');
+  const [passwordDirty, setPasswordDirty] = useState(false);
+  const [passwordError, setPasswordError] = useState('Поле Пароль не может быть пустым');
+  const [nameDirty, setNameDirty] = useState(false);
+  const [nameError, setNameError] = useState('Поле Имя не может быть пустым');
+
+  const [registerFormValid, SetRegisterFormValid] = useState(false);
+  const [loginFormValid, SetLoginFormValid] = useState(false);
+
+  function resetError() {
+    setEmailDirty(false);
+    setPasswordDirty(false);
+    setNameDirty(false);
+    SetRegisterFormValid(false);
+    SetLoginFormValid(false);
+    setEmail('');
+    setPassword('');
+    setName('');
+  }
+
+  useEffect(() => {
+    if (emailError || passwordError) {
+      SetLoginFormValid(false);
+    } else {
+      SetLoginFormValid(true);
+    }
+  }, [emailError, passwordError]);
+
+  useEffect(() => {
+    if (emailError || passwordError || nameError) {
+      SetRegisterFormValid(false);
+    } else {
+      SetRegisterFormValid(true);
+    }
+  }, [emailError, passwordError, nameError]);
+
+  const emailHandler = (e) => {
+    setEmail(e.target.value);
+    if (!validator.isEmail(e.target.value)) {
+      setEmailError('Email должен быть корректным');
+      if (!e.target.value) {
+        setEmailError('Поле "Email" не может быть пустым');
+      }
+    } else {
+      setEmailError('');
+    }
+  };
+
+  const passwordHandler = (e) => {
+    setPassword(e.target.value);
+    if (e.target.value.length < 5) {
+      setPasswordError('Пароль не может быть кароче 5-ти символов');
+      if (!e.target.value) {
+        setPasswordError('Поле "Пароль" не может быть пустым');
+      }
+    } else {
+      setPasswordError('');
+    }
+  };
+
+  const nameHandler = (e) => {
+    setName(e.target.value);
+    if (!validator.isAlpha(e.target.value, 'ru-RU')) {
+      setNameError('Имя должно содержать только буквы русского алфавита');
+      if (!e.target.value) {
+        setNameError('Поле "Имя" не может быть пустым');
+      }
+    } else {
+      setNameError('');
+    }
+  };
+
+  const blurHandler = (e) => {
+    switch (e.target.name) {
+    case 'email': setEmailDirty(true);
+      break;
+    case 'password': setPasswordDirty(true);
+      break;
+    case 'name': setNameDirty(true);
+      break;
+    }
+  };
+
+  /// //////////////////////////////////////валидация
+
   return (
-<<<<<<< HEAD
-    <div className="body">
-      <Switch>
-        <Route path="/main">
-          <Header onRegister={handleLoginPopup} onBurgerMenu={handleBurgerPopup} loggedIn={loggedIn}/>
-          <Main 
-            setKeyWord={setKeyWord} 
-            onSubmitSearchForm={onSubmitSearchForm} 
-            isLoading={isLoading}
-            articles={articles}
-            setArticles={setArticles}
-          />
-          <Footer />
-        </Route>
-        <Route path="/saved-news">
-          <Header onRegister={handleLoginPopup} onBurgerMenu={handleBurgerPopup} loggedIn={loggedIn}/>
-          <SavedNews articles={articles} setArticles={setArticles}/>
-          <Footer />
-        </Route>
-        <Redirect from='/' to='/main' />
-      </Switch>
-      <RegisterPopup 
-        isOpen={isRegisterPopupOpen}
-        onClose={closeAllPopups}
-        onToggle={toggleRegisterPopup}
-        setIsToolipPopupOpen={setIsToolipPopupOpen}
-        setRegisterMessage={setRegisterMessage}
-      />
-      <LoginPopup 
-        onEscape={closeAllPopups}
-        isOpen={isLoginPopupOpen}
-        onClose={closeAllPopups}
-        onToggle={toggleLoginPopup}
-        handleLogin={handleLogin}
-      />
-      <BurgerPopup 
-        isOpen={isBurgerPopupOpen}
-        onRegister={handleLoginPopup}
-        onCloseBurger={closeAllPopups}
-      />
-      <InfoTooltip 
-        isOpen={isToolipPopupOpen}
-        onClose={handleToolipPopup}
-        onToggle={toggleToolipPopup}
-        resultMessage={registerMessage}
-      />
-    </div>
-=======
     <UserContext.Provider value={currentUser}>
       <div className="body">
         <Switch>
           <Route path="/main">
-            <Header onRegister={handleLoginPopup} onBurgerMenu={handleBurgerPopup} loggedIn={loggedIn} />
+            <Header onRegister={handleLoginPopup} onBurgerMenu={handleBurgerPopup} loggedIn={loggedIn} logOut={logOut}/>
             <Main
               setKeyWord={setKeyWord}
               keyWord={keyWord}
@@ -279,13 +272,26 @@ function App() {
               setArticles={setArticles}
               loggedIn={loggedIn}
               savedArticles={savedArticles}
+              setSavedArticles={setSavedArticles}
             />
             <Footer />
           </Route>
           <Route path="/saved-news">
-            <Header onRegister={handleLoginPopup} onBurgerMenu={handleBurgerPopup} loggedIn={loggedIn} />
-            <SavedNews articles={articles} setArticles={setArticles} savedArticles={savedArticles}/>
+            <Header onRegister={handleLoginPopup} onBurgerMenu={handleBurgerPopup} loggedIn={loggedIn} logOut={logOut}/>
+            <ProtectedRoute
+              path='/saved-news'
+              loggedIn={loggedIn}
+              component={SavedNews}
+              articles={articles}
+              setArticles={setArticles}
+              tokenCheck={tokenCheck}
+              savedArticles={savedArticles}
+              setSavedArticles={setSavedArticles}
+            />
             <Footer />
+            {
+              loggedIn ? '' : <Redirect from='/saved-news' to='/main' />
+            }
           </Route>
           <Redirect from='/' to='/main' />
         </Switch>
@@ -295,6 +301,20 @@ function App() {
           onToggle={toggleRegisterPopup}
           setIsToolipPopupOpen={setIsToolipPopupOpen}
           setRegisterMessage={setRegisterMessage}
+          emailDirty={emailDirty}
+          emailError={emailError}
+          passwordDirty={passwordDirty}
+          passwordError={passwordError}
+          nameDirty={nameDirty}
+          nameError={nameError}
+          emailHandler={emailHandler}
+          passwordHandler={passwordHandler}
+          nameHandler={nameHandler}
+          blurHandler={blurHandler}
+          email={email}
+          password={password}
+          name={name}
+          registerFormValid={registerFormValid}
         />
         <LoginPopup
           onEscape={closeAllPopups}
@@ -302,11 +322,23 @@ function App() {
           onClose={closeAllPopups}
           onToggle={toggleLoginPopup}
           handleLogin={handleLogin}
+          emailDirty={emailDirty}
+          emailError={emailError}
+          passwordDirty={passwordDirty}
+          passwordError={passwordError}
+          emailHandler={emailHandler}
+          passwordHandler={passwordHandler}
+          blurHandler={blurHandler}
+          email={email}
+          password={password}
+          loginFormValid={loginFormValid}
         />
         <BurgerPopup
+          loggedIn={loggedIn}
           isOpen={isBurgerPopupOpen}
           onRegister={handleLoginPopup}
           onCloseBurger={closeAllPopups}
+          logOut={logOut}
         />
         <InfoTooltip
           isOpen={isToolipPopupOpen}
@@ -316,7 +348,6 @@ function App() {
         />
       </div>
     </UserContext.Provider>
->>>>>>> 464b370cd969a3ff8b3b12f6f04a1960d547e683
   );
 }
 

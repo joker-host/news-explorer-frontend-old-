@@ -165,7 +165,6 @@
 }
 
 .header__logged-out-button_white {
-    
     display: flex;
     align-items: center;
     color: inherit;
@@ -295,6 +294,9 @@
     }
 
     .header__logged-out-button {
+        display: none;
+    }
+    .header__logged-out-button_white {
         display: none;
     }
 }

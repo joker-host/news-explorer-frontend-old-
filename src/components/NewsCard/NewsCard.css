@@ -27,6 +27,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    border: 1px solid #5f5f5f;
 }
 
 .search-results__card-text {
@@ -57,6 +58,27 @@
     background-repeat: no-repeat;
     background-position: center center;
     background-color: #FFFFFF;
+}
+
+.search-results__save-button-active {
+    cursor: pointer;
+    order: 1;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    border: none;
+    background-image: url(./../../images/save_button_active.svg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-color: #FFFFFF;
+}
+
+.search-results__save-button-active:focus {
+    outline: none;
+}
+
+.search-results__save-button-active:active {
+    outline: none;
 }
 
 .search-results__save-button:hover {
@@ -98,7 +120,7 @@
     opacity: 0;
     visibility: hidden;
     transition: .5s ease-in;
-
+    border: 1px solid #000000;
     width: 182px;
     height: 40px;
     background-color: #FFFFFF;
@@ -232,7 +254,6 @@
 @media (max-width: 1250px) {
     .search-results__card {
         position: relative;
-        /* width: 300px; */
     }
 }
 

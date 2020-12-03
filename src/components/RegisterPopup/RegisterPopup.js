@@ -1,32 +1,36 @@
 import './RegisterPopup.css';
 
+import React from 'react';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
 import { mainApi } from '../../utils/MainApi.js';
 
-import React from 'react';
-import { useState } from 'react';
-
-
-function RegisterPopup({ isOpen, onClose, onToggle, setIsToolipPopupOpen, setRegisterMessage, loadingIndicator }) {
-
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [name, setName] = useState('');
-
-  function formReset() {
-    setEmail('');
-    setPassword('');
-    setName('');
-  }
-
+function RegisterPopup({
+  isOpen,
+  onClose,
+  onToggle,
+  setIsToolipPopupOpen,
+  setRegisterMessage,
+  emailDirty,
+  emailError,
+  passwordDirty,
+  passwordError,
+  nameDirty,
+  nameError,
+  emailHandler,
+  passwordHandler,
+  nameHandler,
+  blurHandler,
+  name,
+  email,
+  password,
+  registerFormValid,
+}) {
   const handleSubmit = (evt) => {
     evt.preventDefault();
     mainApi
       .register(email, password, name)
       .then((res) => {
         if (res.success) {
-          console.log(res);
-          formReset();
           onClose();
         } else {
           console.log(res);
@@ -37,7 +41,7 @@ function RegisterPopup({ isOpen, onClose, onToggle, setIsToolipPopupOpen, setReg
       .catch((err) => {
         console.log(err);
       });
-  }
+  };
 
   return (
     <PopupWithForm
@@ -63,32 +67,30 @@ function RegisterPopup({ isOpen, onClose, onToggle, setIsToolipPopupOpen, setReg
               className='popup__form-input'
               required
               autoComplete='off'
-              id='email-input'
               placeholder='Введите почту'
-              minLength={2}
-              pattern='^(http|https):\/\/[^ "]+$'
               value={email}
-              onChange={(evt) => setEmail(evt.target.value)}
+              onChange={(e) => emailHandler(e)}
+              onBlur={(e) => blurHandler(e)}
             />
-            <span id='email-input-error' className='popup__input-error'>Ошибка</span>
+            {(emailError && emailDirty) && <span id='email-input-error' className='popup__input-error'>{emailError}</span>}
           </label>
 
           <label className="popup__input-label">
             <p className="popup__label-text">Пароль</p>
             <input
-              type='text'
+              type='password'
               name='password'
               className='popup__form-input'
               required
               autoComplete='off'
-              id='password-input'
               placeholder='Введите пароль'
               minLength={5}
               maxLength={50}
               value={password}
-              onChange={(evt) => setPassword(evt.target.value)}
+              onChange={(e) => passwordHandler(e)}
+              onBlur={(e) => blurHandler(e)}
             />
-            <span id='password-input-error' className='popup__input-error'></span>
+            {(passwordError && passwordDirty) && <span id='email-input-error' className='popup__input-error'>{passwordError}</span>}
           </label>
 
           <label className="popup__input-label">
@@ -99,18 +101,17 @@ function RegisterPopup({ isOpen, onClose, onToggle, setIsToolipPopupOpen, setReg
               className='popup__form-input'
               required
               autoComplete='off'
-              id='name-input'
               placeholder='Введите своё имя'
               minLength={2}
               maxLength={30}
-              pattern='[А-ЯЁа-яёA-Za-z-–—\s]*'
               value={name}
-              onChange={(evt) => setName(evt.target.value)}
+              onChange={(e) => nameHandler(e)}
+              onBlur={(e) => blurHandler(e)}
             />
-            <span id='name-input-error' className='popup__input-error'>Ошибка</span>
+            {(nameError && nameDirty) && <span id='email-input-error' className='popup__input-error'>{nameError}</span>}
           </label>
         </div>
-        <button type="submit" className={'popup__save-button popup__save-button_register'} disabled={loadingIndicator}>Зарегистрироваться</button>
+        <button type="submit" className={'popup__save-button popup__save-button_register'} disabled={!registerFormValid}>Зарегистрироваться</button>
       </form>
     </PopupWithForm>
   );

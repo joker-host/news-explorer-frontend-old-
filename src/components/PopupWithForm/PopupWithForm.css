@@ -93,8 +93,9 @@
 }
 
 .popup__save-button:disabled {
-    color: #B6BCBF;
-    background: #E6E8EB;
+    cursor: default;
+    color: #8b8b8b;
+    background: #d0d0d1;
 }
 
 .popup__input-label {
@@ -193,6 +194,10 @@
         height: 30px;
         top: -45px;
         right: 0;
+    }
+
+    .popup__input-error {
+        bottom: 8px;
     }
 }
 

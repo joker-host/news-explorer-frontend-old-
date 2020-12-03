@@ -1,14 +1,19 @@
 import './Header.css';
 
+import React from 'react';
+import { Route, Switch, Link } from 'react-router-dom';
 import logout from '../../images/logout.svg';
 import logout_white from '../../images/logout-white.svg';
 import menu_white from '../../images/menu_white.svg';
 import menu_black from '../../images/menu_black.svg';
+import { UserContext } from '../../contexts/CurrentUserContext.js';
 
-import React from 'react';
-import { Route, Switch, Link } from 'react-router-dom';
+function Header({
+  onRegister, onBurgerMenu, loggedIn, logOut,
+}) {
+  const currentUser = React.useContext(UserContext);
+  const currentUserName = currentUser.name;
 
-function Header({ onRegister, onBurgerMenu, loggedIn, articles }) {
   return (
     <Switch>
       <Route path="/main">
@@ -22,18 +27,13 @@ function Header({ onRegister, onBurgerMenu, loggedIn, articles }) {
               <div className="header__underline"></div>
               Главная
             </Link>
-<<<<<<< HEAD
-            {loggedIn ? <Link className="header__link" to="/saved-news" onClick={console.log(articles)}>Сохраненные статьи</Link> : ''}
-=======
             {loggedIn ? <Link className="header__link" to="/saved-news">Сохраненные статьи</Link> : ''}
->>>>>>> 464b370cd969a3ff8b3b12f6f04a1960d547e683
-            { loggedIn ?
-              <button type='button' className="header__logged-out-button_white">
-                Андрей
+            {loggedIn
+              ? <button type='button' className="header__logged-out-button_white" onClick={logOut}>
+                {currentUserName.charAt(0).toUpperCase() + currentUserName.slice(1)}
                 <img className="header__logged-out-image" src={logout_white} alt="здесь должна быть иконка выхода из аккаунта"></img>
-              </button> 
-              : 
-              <button type='button' className="header__logged-in-button" onClick={onRegister}>Авторизоваться</button>
+              </button>
+              : <button type='button' className="header__logged-in-button" onClick={onRegister}>Авторизоваться</button>
             }
           </div>
         </header>
@@ -50,8 +50,8 @@ function Header({ onRegister, onBurgerMenu, loggedIn, articles }) {
               <div className="header-white__underline"></div>
               Сохраненные статьи
             </Link>
-            <button type='button' className="header__logged-out-button">
-              Андрей
+            <button type='button' className="header__logged-out-button" onClick={logOut}>
+              {currentUserName.charAt(0).toUpperCase() + currentUserName.slice(1)}
               <img className="header__logged-out-image" src={logout} alt="здесь должна быть иконка выхода из аккаунта"></img>
             </button>
           </div>

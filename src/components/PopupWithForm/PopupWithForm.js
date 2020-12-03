@@ -2,8 +2,9 @@ import './PopupWithForm.css';
 
 import React from 'react';
 
-function PopupWithForm({ name, title, isOpen, onClose, children, loadingIndicator, loginOrRegister }) {
-
+function PopupWithForm({
+  name, title, isOpen, onClose, children, loginOrRegister,
+}) {
   return (
     <div className={`popup popup_type_${name} ${isOpen ? 'popup_opened' : ''}`}>
       <div className="popup__container">

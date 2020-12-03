@@ -1,8 +1,9 @@
+import { handleResponse } from './constants.js';
+
 const moment = require('moment');
+
 const dateNow = Date.now();
 const dateFrom = moment(dateNow - 7 * 24 * 3600 * 1000).format('YYYY-MM-DD');
-
-import { handleResponse } from './constants.js';
 
 class NewsApi {
   getArticles(keyWord) {
@@ -10,7 +11,7 @@ class NewsApi {
       {
         method: 'GET',
         headers: {
-          "Accept": "application/json",
+          Accept: 'application/json',
         },
       })
       .then(handleResponse);

@@ -1,35 +1,32 @@
 import './LoginPopup.css';
 
+import React from 'react';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
 import { mainApi } from '../../utils/MainApi.js';
 
-import React from 'react';
-import { useState } from 'react';
-import { useHistory } from 'react-router-dom';
-
-function LoginPopup({ isOpen, onClose, onToggle, handleLogin, loadingIndicator, }) {
-
-  const history = useHistory();
-
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-  function formReset() {
-    setEmail('');
-    setPassword('');
-  }
-
+function LoginPopup({
+  isOpen,
+  onClose,
+  onToggle,
+  handleLogin,
+  emailDirty,
+  emailError,
+  passwordDirty,
+  passwordError,
+  emailHandler,
+  passwordHandler,
+  blurHandler,
+  email,
+  password,
+  loginFormValid,
+}) {
   const handleSubmit = (evt) => {
     evt.preventDefault();
     mainApi
       .authorize(email, password)
       .then((data) => {
         if (data.token) {
-          formReset();
           handleLogin();
-          console.log(data.token)
-          // history.push('/saved-news');
-          console.log('успешно');
           onClose();
         } else if (data.message) {
           console.log(data.message);
@@ -38,7 +35,7 @@ function LoginPopup({ isOpen, onClose, onToggle, handleLogin, loadingIndicator, 
       .catch((err) => {
         console.log(err);
       });
-  }
+  };
 
   return (
     <PopupWithForm
@@ -64,38 +61,33 @@ function LoginPopup({ isOpen, onClose, onToggle, handleLogin, loadingIndicator, 
               className='popup__form-input'
               required
               autoComplete='off'
-              id='email-input'
               placeholder='Введите почту'
-              minLength={2}
-              maxLength={70}
               value={email}
-              pattern='^(http|https):\/\/[^ "]+$'
-              onChange={(evt) => setEmail(evt.target.value)}
+              onChange={(e) => emailHandler(e)}
+              onBlur={(e) => blurHandler(e)}
             />
-            <span id='email-input-error' className='popup__input-error'>Ошибка</span>
+            {(emailError && emailDirty) && <span id='email-input-error' className='popup__input-error'>{emailError}</span>}
           </label>
 
           <label className="popup__input-label">
             <p className="popup__label-text">Пароль</p>
             <input
-              type='text'
+              type='password'
               name='password'
               className='popup__form-input'
-              required
               autoComplete='off'
               id='password-input'
               placeholder='Введите пароль'
-              minLength={5}
-              maxLength={50}
               value={password}
-              onChange={(evt) => setPassword(evt.target.value)}
+              onChange={(e) => passwordHandler(e)}
+              onBlur={(e) => blurHandler(e)}
             />
-            <span id='password-input-error' className='popup__input-error'>Ошибка</span>
+            {(passwordError && passwordDirty) && <span id='email-input-error' className='popup__input-error'>{passwordError}</span>}
           </label>
         </div>
-        <button type="submit" className={'popup__save-button popup__save-button_login'} disabled={loadingIndicator}>Войти</button>
+        <button type="submit" className={'popup__save-button popup__save-button_login'} disabled={!loginFormValid}>Войти</button>
       </form>
-      
+
     </PopupWithForm>
   );
 }

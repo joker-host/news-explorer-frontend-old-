@@ -1,11 +1,10 @@
 import './SearchForm.css';
 
 import React from 'react';
-import { useState, useEffect } from 'react';
+
 // import { Route, Link, useHistory } from 'react-router-dom';
 
 function SearchForm({ setKeyWord, onSubmitSearchForm }) {
-
   const keyWord = localStorage.getItem('Key word');
 
   function handleChangeKeyWord(e) {
